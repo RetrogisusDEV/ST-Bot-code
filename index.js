@@ -69,14 +69,13 @@ client.on('ready', () => {
             let expT = Math.floor(Math.random() * 1500) + 100;
             interaction.reply(`>>> you gain \n Exp:${expT} and Money:${moneyT}`)
          Exp.sumar(`exp_${interaction.user.id}`, expT);
-          Money.sumar(`money_${interaction.user.id}`, moneyT);
-        }
+                  }
     });
 
     client.on('interactionCreate', async interaction => {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === "profile") {
-        await exp = Exp.obtener(`exp_${interaction.user.id}`);    
+        let exp = Exp.obtener(`exp_${interaction.user.id}`);    
   if (exp === null) exp = 0;
             
        await interaction.reply(`>>> profile account \n exp: ${exp}`)                                                           }});
