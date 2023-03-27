@@ -7,16 +7,14 @@ const client = new Discord.Client({
         Discord.Intents.FLAGS.GUILD_INTEGRATIONS,
     ]
 });
-const db = require('megadb');
-let Exp = new db.crearDB('Exp');
-let Money = new db.crearDB('Money');
-
+const DataBa = require("@replit/database");
+const dbs= new DataBa()
 const express = require('express');
 const app = express();
 app.listen(() => console.log(`Server IS Started`));
 const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
 // PROPERTIES
-const token = 'OTI5NzkxNDkxNTc5MjA3NzMw.Gk0HwW.43p29eAgLpgAosSgjx9gW4WZjMzoxx4LRzAhvo';
+const token = process.env['Token'];
 client.login(token);
 
 client.on('ready', () => {
@@ -39,7 +37,8 @@ client.on('ready', () => {
         .setDescription('info of ST');
     const work = new SlashCommandBuilder()
         .setName('work')
-        .setDescription('gain exp and money');
+        .setDescription('crashea...');
+const mySecret = process.env['token']
     const profile = new SlashCommandBuilder()
         .setName('profile')
         .setDescription('view profile');
@@ -64,21 +63,19 @@ client.on('ready', () => {
     client.on('interactionCreate', async interaction => {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === "work") {
-            if (Exp.has(`exp_${interaction.user.id}`)) Exp.set(`exp_${interaction.user.id}`,0);
-            let moneyT = Math.floor(Math.random() * 1500) + 100;
-            let expT = Math.floor(Math.random() * 1500) + 100;
-            interaction.reply(`>>> you gain \n Exp:${expT} and Money:${moneyT}`)
-         Exp.sumar(`exp_${interaction.user.id}`, expT);
+           let amount = 100;
+			let work  = dbs.set(`${interaction.user.id}`,`${amount}`).then(value => {})
+			interaction.reply(`>>> you gain \n Exp:${amount} and Money:${amount}`)
+         
                   }
     });
 
     client.on('interactionCreate', async interaction => {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === "profile") {
-        let exp = Exp.obtener(`exp_${interaction.user.id}`);    
-  if (exp === null) exp = 0;
-            
-       await interaction.reply(`>>> profile account \n exp: ${exp}`)                                                           }});
+         let bal = dbs.get(`${interaction.user.id}`).then(() => {})
+		interaction.reply(`balance ${bal}`)
+		}});
     cmds.push(ping);
     cmds.push(info);
     cmds.push(work);
@@ -100,3 +97,13 @@ client.on('ready', () => {
         console.log(cmds)
     }
 });
+const Database = require("@replit/database")
+const db = new Database()
+const Database = require("@replit/database")
+const db = new Database()
+const Database = require("@replit/database")
+const db = new Database()
+db.set("key", "value").then(() => {})
+db.set("key", "value").then(() => {})
+db.get("key").then(value => {})
+db.get("key").then(value => {})
