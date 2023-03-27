@@ -7,8 +7,8 @@ const client = new Discord.Client({
         Discord.Intents.FLAGS.GUILD_INTEGRATIONS,
     ]
 });
-const DataBa = require("@replit/database");
-const dbs= new DataBa()
+// const DataBa = require("@replit/database");
+// const dbs= new DataBa()
 const express = require('express');
 const app = express();
 app.listen(() => console.log(`Server IS Started`));
@@ -64,7 +64,7 @@ const mySecret = process.env['token']
         if (!interaction.isCommand()) return;
         if (interaction.commandName === "work") {
            let amount = 100;
-			let work  = dbs.set(`${interaction.user.id}`,`${amount}`).then(value => {})
+			// let work  = dbs.set(`${interaction.user.id}`,`${amount}`).then(value => {})
 			interaction.reply(`>>> you gain \n Exp:${amount} and Money:${amount}`)
          
                   }
@@ -73,8 +73,8 @@ const mySecret = process.env['token']
     client.on('interactionCreate', async interaction => {
         if (!interaction.isCommand()) return;
         if (interaction.commandName === "profile") {
-         let bal = dbs.get(`${interaction.user.id}`).then(() => {})
-		interaction.reply(`balance ${bal}`)
+         // let bal = dbs.get(`${interaction.user.id}`).then(() => {})
+		// interaction.reply(`balance ${bal}`)
 		}});
     cmds.push(ping);
     cmds.push(info);
